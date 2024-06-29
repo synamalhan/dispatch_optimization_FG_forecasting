@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Plate FG Forecasting</title>
+  </head>
+  <body>
+    <h1>Plate FG Forecasting</h1>
+    <form action="" method="post">
+      <label for="slabID">Slab ID:</label><br>
+      <input type="text" id="slabID" name="slabID" required><br>
+      <label for="length">Length:</label><br>
+      <input type="number" id="length" name="length" step="0.01" required><br>
+      <label for="width">Width:</label><br>
+      <input type="number" id="width" name="width" step="0.01" required><br>
+      <label for="thickness">Thickness:</label><br>
+      <input type="number" id="thickness" name="thickness" step="0.01" required><br>
+      <label for="quantity">Quantity:</label><br>
+      <input type="number" id="quantity" name="quantity" step="0.01" required><br>
+      <label for="supplyRoute">Supply Route:</label><br>
+      <select id="supplyRoute" name="supplyRoute" required>
+        <option value="8">NR+SR</option>
+        <option value="5">N AND SR</option>
+        <option value="11">Q&T</option>
+        <option value="12">Q/Q&T</option>
+        <option value="10">Q</option>
+        <option value="6">N&T</option>
+        <option value="1">AR</option>
+        <option value="9">ONLINE NORMALIZING</option>
+        <option value="2">ASTM A-578 L-B</option>
+        <option value="7">NR</option>
+        <option value="13">THERMO MECHANICAL ROLLE</option>
+        <option value="14">TMCP</option>
+        <option value="4">N</option>
+        <option value="3">FN</option>
+      </select><br>
+      <label for="wipDate">WIP Date:</label><br>
+      <input type="date" id="wipDate" name="wipDate" required><br>
+      <label for="internalGrade">Internal Grade:</label><br>
+      <select id="internalGrade" name="internalGrade" required>
+        <option value="288">288</option>
+        <option value="385">385</option>
+        <option value="262">262</option>
+        <option value="225">225</option>
+        <option value="240">240</option>
+        <option value="226">226</option>
+        <option value="80">80</option>
+        <option value="249">249</option>
+      </select><br>
+      <input type="submit" value="Predict">
+    </form>
+    <div id="output"></div>
+
+    <script>
+      const form = document.querySelector('form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const response = await fetch('', {
+          method: 'POST',
+          body: new FormData(form)
+        });
+        const data = await response.json();
+        document.getElementById('output').innerHTML = `The predicted FG date is: ${data.predictedFGDate}<br>The production is predicted to take ${data.productionDays} days`;
+      });
+    </script>
+  </body>
+</html>
