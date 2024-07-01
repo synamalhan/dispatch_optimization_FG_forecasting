@@ -58,7 +58,7 @@ internal_grade_map = [
     'JA25STTM01C', 'JA35STTM02C', 'JA41NRBS02N', 'JASB35TM01D', 'JA49PVFN02', 'JA35IMOP01Di',
     'JA27MGTM01', 'JADMRN01Di', 'JAMA45TM01C', 'JARH40EX01C', 'JA41NRBS01', 'JA35STNR01N'
 ]
-supply_route_map = ['AR', 'NR', 'N', 'NRSR', 'TMCP', 'QT', 'Q', 'NT']
+supply_condition_map = ['AR', 'NR', 'N', 'NRSR', 'TMCP', 'QT', 'Q', 'NT']
 
 # User input for thickness
 with col1:
@@ -85,7 +85,7 @@ with col2:
 
 # User input for supply route
 with col3:
-    supplyRoute = st.selectbox("Supply Route:", supply_route_map)
+    supply_condition = st.selectbox("Supply Condition:", supply_condition_map)
 
 # Create another grid of 3 columns for more user inputs
 col1, col2, col3 = st.columns(3)
@@ -111,13 +111,13 @@ if st.button("Predict", help="Click to predict the production days"):
         'THICKNESS': [thickness],
         'LENGTH': [length],
         'WIDTH': [width],
-        'SUPPLY_CONDITION': [supplyRoute]
+        'SUPPLY_CONDITION': [supply_condition]
     })
 
     future_df['SUPPLY_CONDITION'] = pd.Categorical(future_df['SUPPLY_CONDITION'])
 
     # Determine supply route condition
-    if(supplyRoute in ['AR','NR','TMCP']):
+    if(supply_condition in ['AR','NR','TMCP']):
         supply_route = 'NON HTC'
     else:
         supply_route = 'HTC'
@@ -176,7 +176,7 @@ if st.button("Predict", help="Click to predict the production days"):
     else:
         predicted_days += (buffer_date / 1400)
 
-    if supplyRoute not in ['AR','NR','TMCP']:
+    if supply_condition not in ['AR','NR','TMCP']:
         predicted_days += (buffer_htc / 350)
 
     # Output result
