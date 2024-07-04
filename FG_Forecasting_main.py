@@ -1,7 +1,10 @@
+
+import time
 import FG_Forecasting_frontend as frontend
 import FG_Forecasting_database as db
 import FG_Forecasting_logic as logic
-import FG_Forecasting_training as train
+import FG_Forecasting_add_data as add_data
+import streamlit as st
 
 def main():
 
@@ -31,11 +34,19 @@ def main():
 
 
     elif page == 'Train':
-        frontend.upload_files()
-        # pm_operations, masterdata_goods, training= frontend.upload_files()
-        # if training:
-        #     df_train = train.combine_data(pm_operations, masterdata_goods)
-        #     train.push_data(df_train, crs, conn)
+        pm_operations, masterdata_goods, train= frontend.upload_files()
+
+        
+
+        if train:
+            with st.spinner(text="Uploading..."):
+                df_train = add_data.combine_data(pm_operations, masterdata_goods)
+                add_data.clean_data(df_train)
+                add_data.push_data_into_temp(df_train, crs, conn)
+                done = add_data.push_into_master_data(crs, conn)
+            st.success('Data has been added to the database')
+        else:
+            st.write("Upload Files")
 
 
 

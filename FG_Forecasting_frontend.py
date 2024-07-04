@@ -23,7 +23,7 @@ def page_configuration():
 
     # Set the page configuration for Streamlit app
     st.set_page_config(
-        page_title="Plate FG Forecasting",
+        page_title="Plate FG Date Forecasting",
         page_icon="D:/JSPL/Dispatch_FG/FG/assets/jindal-flag.png",
         layout="wide"
     )
@@ -49,7 +49,7 @@ def page_configuration():
     with col1:
         st.image("D:/JSPL/Dispatch_FG/FG/assets/logo_white.svg", width=150)
     with col2:
-        st.markdown("<h1 style='text-align: center; font-size: 36px'>Plate FG Forecasting</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center; font-size: 36px'>Plate FG Date Forecasting</h1>", unsafe_allow_html=True)
     st.write("")
     st.write("")
 
@@ -137,8 +137,11 @@ def upload_files():
     with col2:
         file2 = st.file_uploader("Upload MasterdataGoodsMovement file")
 
-    training = st.button("Begin Training")
-    # if training and file1 and file2:
-    #     return file1, file2, training
+    confirm = st.button("Add Data")
+
+    if (file1 is not None) and (file2 is not None) and (confirm):
+        return file1, file2, confirm
+    else:
+        return None, None, False
 
 
