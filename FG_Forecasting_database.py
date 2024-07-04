@@ -12,7 +12,7 @@ def connect_to_database():
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
 
     cursor = cnxn.cursor()
-    return cursor
+    return cursor, cnxn
 
 # Function to fetch TOP 30 Internal Grades by number of entries 
 def get_all_internal_grades(cursor):
@@ -48,6 +48,8 @@ def get_all_supply_condition(cursor):
 
     data_values = [row[0] for row in data]
     return data_values;
+
+
 
 def load_all_training_data(cursor, internalGrade):
 

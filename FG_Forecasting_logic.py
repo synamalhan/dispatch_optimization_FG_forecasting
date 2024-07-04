@@ -19,7 +19,6 @@ def train_model(df, future_df):
     return predicted_days
 
 
-
 def added_logics(predicted_days, supply_condition, tpip, thickness, buffer_cutting, buffer_htc):
     # Determine supply route condition
     if(supply_condition in ['AR','NR','TMCP']):
