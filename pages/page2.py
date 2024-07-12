@@ -119,6 +119,6 @@ if col2.button("Add New Hub"):
             # Save updated data back to CSV
             old_hub_data.to_csv(os.path.join(os.path.dirname(__file__),'../database/database.csv'), index=False)
 
-            st.write("Changes committed successfully.")
+            st.success("Changes committed successfully.")
     else:
         st.warning("Please add a new hub and calculate distances before committing changes.")
