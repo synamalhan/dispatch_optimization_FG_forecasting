@@ -85,7 +85,7 @@ for i, index in enumerate(indices):
 cluster_df = pd.DataFrame([(hub, ', '.join(customers)) for hub, customers in clusters.items()], columns=['Hub', 'Customers'])
 
 # Display the clusters table
-st.write(cluster_df)
+st.datafram(cluster_df, hide_index=True)
 
 # Display the Folium map
 view_map = st.checkbox("Display Map")
