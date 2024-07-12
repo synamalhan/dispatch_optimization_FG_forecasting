@@ -12,11 +12,11 @@ def image_to_base64(image):
 # Set the page configuration for Streamlit app
 st.set_page_config(
     page_title="Hub Analysis",
-    page_icon="D:/JSPL/Dispatch_FG/Dispatch/last_point/assets/jindal-flag.png"
+    page_icon="assets/jindal-flag.png"
 )
 
 # Load the background image
-image = Image.open('D:/JSPL/Dispatch_FG/Dispatch/last_point/assets/bg_jspl.jpg')
+image = Image.open('assets/bg_jspl.jpg')
 
 # Add a background image with lower opacity to the Streamlit app
 st.markdown(f'''
