@@ -26,7 +26,7 @@ if st.button("Find Cost"):
             distance = float(distance_array[0])  # Ensure distance is a single number
             print(type(distance))
             cost = distance * float(cost_per_km)
-            st.write(f"The cost endured between {hub_name} and {customer_name} is {cost}")
+            st.success(f"The cost endured between {hub_name} and {customer_name} is {cost:.2f}")
         else:
             st.write("Hub or customer not found in the CSV file")
     else:
