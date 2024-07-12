@@ -38,7 +38,7 @@ customers['customer_coordinates'] = customers['customer_coordinates'].apply(lamb
 
 col1, col2, col3 = st.columns([1, 6, 1])
 with col1:
-    st.image((os.path.join(os.path.dirname(__file__),"../assets/logo_white.svg"), width=150)
+    st.image(os.path.join(os.path.dirname(__file__),"../assets/logo_white.svg"), width=150)
 with col2:
     st.markdown("<h1 style='text-align: center; font-size: 36px'>New Hub Analysis</h1>", unsafe_allow_html=True)
     
