@@ -4,7 +4,7 @@ import os
 from git import Repo
 
 def commit_and_push_changes(csv_file_path):
-    repo = Repo("https://github.com/synamalhan/dispatch_optimization_FG_forecasting.git")
+    repo = Repo(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
     repo.git.add(csv_file_path)
     repo.index.commit("Updated database.csv through Streamlit app")
     origin = repo.remote(name='origin')
