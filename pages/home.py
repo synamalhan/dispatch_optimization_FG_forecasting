@@ -3,7 +3,7 @@ import streamlit as st
 
 col1, col2, col3 = st.columns([1, 6, 1])
 with col1:
-    st.image("D:/JSPL/Dispatch_FG/Dispatch/last_point/assets/logo_white.svg", width=120)
+    st.image("../assets/logo_white.svg", width=120)
 with col2:
     st.markdown("<h1 style='text-align: center; font-size: 36px'>HOME</h1>", unsafe_allow_html=True)
 
