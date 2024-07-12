@@ -4,6 +4,7 @@ import numpy as np
 import streamlit as st
 from streamlit_folium import folium_static
 import pandas as pd
+import os 
 
 @st.cache_data
 def load_data(file):
