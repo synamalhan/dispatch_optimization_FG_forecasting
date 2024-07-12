@@ -185,7 +185,7 @@ if st.session_state.new_hub_coords and 'clusters_dict' in st.session_state:
 
 # Display clusters and distances if available in session state
 if 'distance_df' in st.session_state:
-    st.sidebar.dataframe(st.session_state.distance_df.drop(columns=['Hub Coordinates'], hide_index=True))
+    st.sidebar.dataframe(st.session_state.distance_df.drop(columns=['Hub Coordinates']), hide_index=True)
 
 # Add a "Cost Comparison" button in the sidebar
 if st.sidebar.button("Cost Comparison"):
