@@ -2,6 +2,7 @@ import base64
 from io import BytesIO
 import streamlit as st
 from PIL import Image
+import os
 
 def image_to_base64(image):
     buffered = BytesIO()
