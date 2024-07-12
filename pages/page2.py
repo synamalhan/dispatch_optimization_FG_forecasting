@@ -107,8 +107,7 @@ if col2.button("Add New Hub"):
 
                     # Add the new entry
                     old_hub_data = pd.concat([old_hub_data, new_entry], ignore_index=True)
-
-                    st.write(f"Processed new connection for customer: {customer_name}")
+                    
                 else:
                     st.warning(f"No matching customer found in the old hub data for customer: {customer_name}")
 
