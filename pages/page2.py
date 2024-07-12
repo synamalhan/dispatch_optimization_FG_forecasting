@@ -1,6 +1,14 @@
 import streamlit as st
 import pandas as pd
 import os
+from git import Repo
+
+def commit_and_push_changes():
+    repo = Repo(repo_path)
+    repo.git.add(csv_file_path)
+    repo.index.commit("Updated database.csv through Streamlit app")
+    origin = repo.remote(name='origin')
+    origin.push()
 
 # Load the new hub distance data from session state
 new_hub_distance_df = st.session_state.get('distance_df', pd.DataFrame())
@@ -115,9 +123,11 @@ if col2.button("Add New Hub"):
             if archive_entries:
                 archive_df = pd.DataFrame(archive_entries)
                 archive_df.to_csv(os.path.join(os.path.dirname(__file__),'../database/archive.csv'), mode='a', header=False, index=False)
+                commit_and_push_changes()
 
             # Save updated data back to CSV
             old_hub_data.to_csv(os.path.join(os.path.dirname(__file__),'../database/database.csv'), index=False)
+            commit_and_push_changes()
 
             st.success("Changes committed successfully.")
     else:
