@@ -148,7 +148,7 @@ if colw2.button("New Trial"):
     st.session_state.display_lines = True
     st.session_state.cost_per_km = 3.9
     st.session_state.distance_data = None
-    st.session_state.distance_df = pd.DataFrame(columns=['Hub', 'Customer', 'Distance (km)', 'Cost', 'Hub Coordinates'])
+    st.session_state.distance_df = pd.DataFrame(columns=['Hub', 'Customer', 'Distance (km)', 'Cost (₹)', 'Hub Coordinates'])
     st.session_state.clusters_dict = {}
     new_hub_name = ""
     lat = ""
@@ -180,12 +180,12 @@ if st.session_state.new_hub_coords and 'clusters_dict' in st.session_state:
                 st.error(f"OSRM request failed for customer {customer} with status code {response.status_code}")
 
         if distance_data:
-            distance_df = pd.DataFrame(distance_data, columns=['Hub', 'Customer', 'Distance (km)', 'Cost', 'Hub Coordinates'])
+            distance_df = pd.DataFrame(distance_data, columns=['Hub', 'Customer', 'Distance (km)', 'Cost (₹)', 'Hub Coordinates'])
             st.session_state.distance_df = distance_df
 
 # Display clusters and distances if available in session state
 if 'distance_df' in st.session_state:
-    st.sidebar.write(st.session_state.distance_df.drop(columns=['Hub Coordinates']))
+    st.sidebar.dataframe(st.session_state.distance_df.drop(columns=['Hub Coordinates'], hide_index=True))
 
 # Add a "Cost Comparison" button in the sidebar
 if st.sidebar.button("Cost Comparison"):
