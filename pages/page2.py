@@ -5,7 +5,7 @@ import pandas as pd
 new_hub_distance_df = st.session_state.get('distance_df', pd.DataFrame())
 
 # Load the old hub data from 'new_final.csv'
-old_hub_data = pd.read_csv(r'D:\JSPL\Dispatch_FG\Dispatch\last_point\database\database.csv')
+old_hub_data = pd.read_csv('../database/database.csv')
 
 # Default cost value
 default_cost_per_km = 3.9
@@ -14,7 +14,7 @@ st.page_link("pages/home.py", label="Home", icon=":material/home:")
 
 col1, col2, col3 = st.columns([1, 6, 1])
 with col1:
-    st.image("D:/JSPL/Dispatch_FG/Dispatch/last_point/assets/logo_white.svg", width=150)
+    st.image("../assets/logo_white.svg", width=150)
 with col2:
     st.markdown("<h1 style='text-align: center; font-size: 36px'>New Hub Cost Analysis</h1>", unsafe_allow_html=True)
 
@@ -114,10 +114,10 @@ if col2.button("Add New Hub"):
             # Save archived entries to CSV
             if archive_entries:
                 archive_df = pd.DataFrame(archive_entries)
-                archive_df.to_csv(r'D:\JSPL\Dispatch_FG\Dispatch\last_point\database\archive.csv', mode='a', header=False, index=False)
+                archive_df.to_csv('../database/archive.csv', mode='a', header=False, index=False)
 
             # Save updated data back to CSV
-            old_hub_data.to_csv(r'D:\JSPL\Dispatch_FG\Dispatch\last_point\database\database.csv', index=False)
+            old_hub_data.to_csv('../database/database.csv', index=False)
 
             st.write("Changes committed successfully.")
     else:
