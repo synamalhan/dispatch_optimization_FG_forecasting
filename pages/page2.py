@@ -14,7 +14,7 @@ st.page_link("pages/home.py", label="Home", icon=":material/home:")
 
 col1, col2, col3 = st.columns([1, 6, 1])
 with col1:
-    st.image((os.path.join(os.path.dirname(__file__),"../assets/logo_white.svg"), width=150)
+    st.image(os.path.join(os.path.dirname(__file__),"../assets/logo_white.svg"), width=150)
 with col2:
     st.markdown("<h1 style='text-align: center; font-size: 36px'>New Hub Cost Analysis</h1>", unsafe_allow_html=True)
 
@@ -114,10 +114,10 @@ if col2.button("Add New Hub"):
             # Save archived entries to CSV
             if archive_entries:
                 archive_df = pd.DataFrame(archive_entries)
-                archive_df.to_csv((os.path.join(os.path.dirname(__file__),'../database/archive.csv'), mode='a', header=False, index=False)
+                archive_df.to_csv(os.path.join(os.path.dirname(__file__),'../database/archive.csv'), mode='a', header=False, index=False)
 
             # Save updated data back to CSV
-            old_hub_data.to_csv((os.path.join(os.path.dirname(__file__),'../database/database.csv'), index=False)
+            old_hub_data.to_csv(os.path.join(os.path.dirname(__file__),'../database/database.csv'), index=False)
 
             st.write("Changes committed successfully.")
     else:
