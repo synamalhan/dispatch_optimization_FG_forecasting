@@ -5,7 +5,7 @@ import pandas as pd
 new_hub_distance_df = st.session_state.get('distance_df', pd.DataFrame())
 
 # Load the old hub data from 'new_final.csv'
-old_hub_data = pd.read_csv('D:/JSPL/Dispatch_FG/Dispatch/new_final.csv')
+old_hub_data = pd.read_csv(r'D:\JSPL\Dispatch_FG\Dispatch\last_point\database\database.csv')
 
 # Default cost value
 default_cost_per_km = 3.9
@@ -70,31 +70,55 @@ if col1.button("Back"):
 if col2.button("Add New Hub"):
     # Ensure new_hub_distance_df is not empty
     if not new_hub_distance_df.empty:
-        new_hub_name = new_hub_distance_df['Hub'].iloc[0]
-        customer_name = new_hub_distance_df['Customer'].iloc[0]
-        new_hub_coords = new_hub_distance_df['Hub Coordinates'].iloc[0]
-        distance = new_hub_distance_df['Distance (km)'].iloc[0]
-
         # Ensure old_hub_data has the customer_coordinates column
         if 'customer_coordinates' not in old_hub_data.columns:
             st.error("The 'customer_coordinates' column is missing in the old hub data.")
         else:
-            # Delete old entry with the same customer name
-            old_hub_data = old_hub_data[old_hub_data['customer'] != customer_name]
+            archive_entries = []
 
-            # Add new entry
-            # Find the first available customer in the filtered old hub data
-            existing_customer_row = filtered_old_hub_data.iloc[0] if not filtered_old_hub_data.empty else None
+            for i, row in new_hub_distance_df.iterrows():
+                new_hub_name = row['Hub']
+                customer_name = row['Customer']
+                new_hub_coords = row['Hub Coordinates']
+                distance = row['Distance (km)']
 
-            if existing_customer_row is not None:
-                new_entry = [new_hub_name, "state", customer_name, distance, new_hub_coords, existing_customer_row['customer_coordinates']]
-                old_hub_data.loc[len(old_hub_data)] = new_entry
+                # Filter old hub data for the specific customer
+                filtered_old_hub_data = old_hub_data[old_hub_data['customer'] == customer_name]
 
-                # Save updated data back to CSV
-                old_hub_data.to_csv('D:/JSPL/Dispatch_FG/Dispatch/new_final.csv', index=False)
+                if not filtered_old_hub_data.empty:
+                    existing_customer_row = filtered_old_hub_data.iloc[0]
 
-                st.write("Changes committed successfully.")
-            else:
-                st.warning("No matching customer found in the old hub data.")
+                    # Archive the old entry
+                    archive_entries.append(existing_customer_row)
+
+                    # Delete old entry with the same customer name
+                    old_hub_data = old_hub_data[old_hub_data['customer'] != customer_name]
+
+                    # Create the new entry as a DataFrame
+                    new_entry = pd.DataFrame([{
+                        'hub': new_hub_name,
+                        'state': "state",  # Make sure this is updated to the correct value or derived from somewhere
+                        'customer': customer_name,
+                        'distance': distance,
+                        'hub_coordinates': new_hub_coords,
+                        'customer_coordinates': existing_customer_row['customer_coordinates']
+                    }])
+
+                    # Add the new entry
+                    old_hub_data = pd.concat([old_hub_data, new_entry], ignore_index=True)
+
+                    st.write(f"Processed new connection for customer: {customer_name}")
+                else:
+                    st.warning(f"No matching customer found in the old hub data for customer: {customer_name}")
+
+            # Save archived entries to CSV
+            if archive_entries:
+                archive_df = pd.DataFrame(archive_entries)
+                archive_df.to_csv(r'D:\JSPL\Dispatch_FG\Dispatch\last_point\database\archive.csv', mode='a', header=False, index=False)
+
+            # Save updated data back to CSV
+            old_hub_data.to_csv(r'D:\JSPL\Dispatch_FG\Dispatch\last_point\database\database.csv', index=False)
+
+            st.write("Changes committed successfully.")
     else:
         st.warning("Please add a new hub and calculate distances before committing changes.")

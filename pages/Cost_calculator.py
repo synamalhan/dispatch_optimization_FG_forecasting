@@ -10,7 +10,7 @@ with col1:
 with col2:
     st.markdown("<h1 style='text-align: center; font-size: 36px'>Cost Calculator</h1>", unsafe_allow_html=True)
 
-file_path = 'D:/JSPL/Dispatch_FG/Dispatch/new_final.csv'  # replace with your csv file path
+file_path = r'D:\JSPL\Dispatch_FG\Dispatch\last_point\database\database.csv'  # replace with your csv file path
 data = pd.read_csv(file_path)
 
 hub_name = st.text_input("Enter the hub name")

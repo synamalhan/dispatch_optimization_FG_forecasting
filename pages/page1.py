@@ -25,7 +25,7 @@ if 'clusters_dict' not in st.session_state:
     st.session_state.clusters_dict = {}
 
 # Read the CSV file
-data = pd.read_csv('D:/JSPL/Dispatch_FG/Dispatch/final.csv')
+data = pd.read_csv(r'D:\JSPL\Dispatch_FG\Dispatch\last_point\database\database.csv')
 
 # Extract hubs and customers from the CSV file
 hubs = data[['hub', 'hub_coordinates']].drop_duplicates()
