@@ -3,8 +3,8 @@ import pandas as pd
 import os
 from git import Repo
 
-def commit_and_push_changes():
-    repo = Repo(repo_path)
+def commit_and_push_changes(csv_file_path):
+    repo = Repo("https://github.com/synamalhan/dispatch_optimization_FG_forecasting.git")
     repo.git.add(csv_file_path)
     repo.index.commit("Updated database.csv through Streamlit app")
     origin = repo.remote(name='origin')
@@ -123,11 +123,11 @@ if col2.button("Add New Hub"):
             if archive_entries:
                 archive_df = pd.DataFrame(archive_entries)
                 archive_df.to_csv(os.path.join(os.path.dirname(__file__),'../database/archive.csv'), mode='a', header=False, index=False)
-                commit_and_push_changes()
+                commit_and_push_changes(os.path.join(os.path.dirname(__file__),'../database/archive.csv'))
 
             # Save updated data back to CSV
             old_hub_data.to_csv(os.path.join(os.path.dirname(__file__),'../database/database.csv'), index=False)
-            commit_and_push_changes()
+            commit_and_push_changes(os.path.join(os.path.dirname(__file__),'../database/database.csv'))
 
             st.success("Changes committed successfully.")
     else:
