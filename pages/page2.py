@@ -19,7 +19,7 @@ with col1:
 with col2:
     st.markdown("<h1 style='text-align: center; font-size: 36px'>New Hub Cost Analysis</h1>", unsafe_allow_html=True)
 
-cost_per_km = st.number_input("Cost per Km", value=st.session_state.cost_per_km or default_cost_per_km)
+cost_per_km = st.number_input("Cost per Km", value= default_cost_per_km)
 
 # Update cost in new hub distance data
 if not new_hub_distance_df.empty:
