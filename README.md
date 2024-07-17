@@ -34,13 +34,13 @@ The FG Forecasting module predicts future FG values using machine learning techn
    ```
 2. **Running the App:**
 
-```bash
-streamlit run FG_Forecasting_main.py
-```
+   ```bash
+   streamlit run FG_Forecasting_main.py
+   ```
 3. **Database Setup:**
 
-- Ensure MS SQL Server 2022 is installed and properly configured.
-- Create necessary tables and load your data.
+   - Ensure MS SQL Server 2022 is installed and properly configured.
+   - Create necessary tables and load your data.
 
 ### Pages
 1. **pages/home.py:** Provides an overview of the plate production process and the significance of the project.
@@ -64,22 +64,22 @@ The Last Point Distribution module optimizes the distribution of stockyards usin
 4. **New Stockyard Cost Analysis:** Performs a cost analysis between new and old stockyards to identify better service options.
 
 ### Technologies
-- **Python 3.12.4**
-- **Folium**
-- **Streamlit**
-- **OSRM**
+   - **Python 3.12.4**
+   - **Folium**
+   - **Streamlit**
+   - **OSRM**
 
 ### Usage
 1. **Installation:**
-```bash
-pip install streamlit folium osrm-py streamlit-folium
-```
+   ```bash
+   pip install streamlit folium osrm-py streamlit-folium
+   ```
 2. **Running the App:**
-```bash
-streamlit run LP_main.py
-```
+   ```bash
+   streamlit run LP_main.py
+   ```
 3. **Database Setup:**
-- Ensure both the csv files ```database.csv``` and ```archive.csv``` are installed and placed in approproate repositories
+   - Ensure both the csv files ```database.csv``` and ```archive.csv``` are installed and placed in approproate repositories
 
 ### Pages
 1. **pages/home.py:** Shows an overview of the project and provides links to all relevant pages
