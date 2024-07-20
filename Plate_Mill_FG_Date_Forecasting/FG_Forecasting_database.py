@@ -4,10 +4,10 @@ import pandas as pd
 
 # Database 
 def connect_to_database():
-    server = 'SYNA'
-    database = 'FG_DATA'
-    username = 'testuser'
-    password = 'User123'
+    server = ''
+    database = ''
+    username = ''
+    password = ''
 
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
 
